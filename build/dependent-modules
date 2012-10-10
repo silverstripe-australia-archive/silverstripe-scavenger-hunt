@@ -1,0 +1,6 @@
+
+sqlite3:master git://github.com/silverstripe-labs/silverstripe-sqlite3.git local
+# cms:master git://github.com/silverstripe/silverstripe-cms.git local
+# framework:master git://github.com/silverstripe/sapphire.git local
+
+SortableGridField git://github.com/UndefinedOffset/SortableGridField.git local
