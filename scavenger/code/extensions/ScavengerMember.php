@@ -20,7 +20,7 @@ class ScavengerMember extends DataExtension {
 			throw new ValidationException("Invalid username: a-z 0-9 or _ allowed");
 		}
 	}
-	
+
 	public function responsesInHunt(ScavengerHuntPage $scavengerHunt) {
 		return DataList::create('TaskResponse')->filter(array('ResponderID' => $this->owner->ID));
 	}

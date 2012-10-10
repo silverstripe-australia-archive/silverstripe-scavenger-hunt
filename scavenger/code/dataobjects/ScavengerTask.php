@@ -38,4 +38,19 @@ class ScavengerTask extends DataObject {
 
 		return $fields;
 	}
+	
+	protected function newResponse() {
+		$response = TaskResponse::create();
+		$response->TaskID = $this->ID;
+		$response->HuntID = $this->HuntID;
+		return $response;
+	}
+	
+	public function updateTaskFields(FieldList $fields) {
+		
+	}
+	
+	public function processSubmission($data) {
+		
+	}
 }

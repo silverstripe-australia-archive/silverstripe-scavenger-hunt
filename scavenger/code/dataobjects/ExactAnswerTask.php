@@ -15,4 +15,21 @@ class ExactAnswerTask extends ScavengerTask {
 		$fields->addFieldToTab('Root.Main', TextField::create('ExpectedAnswer','Answer'), 'Description');
 		return $fields;
 	}
+	
+	public function updateTaskFields(FieldList $fields) {
+		$fields->push(new LiteralField('Question', $this->Description));
+		$fields->push(new TextField('Answer', 'Answer'));
+	}
+	
+	public function processSubmission($data) {
+		if (isset($data['Answer']) && $data['Answer'] == $this->ExpectedAnswer) {
+			$response = $this->newResponse();
+			$response->Response = $data['Answer'];
+			$response->Status = 'Accepted';
+			$response->write();
+			return $response;
+		}
+		return 'Incorrect answer';
+	}
 }
+

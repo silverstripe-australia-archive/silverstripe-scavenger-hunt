@@ -7,11 +7,11 @@
 		$Content
 		<% if CurrentMember %>
 		
+		<p>
 		Hi $CurrentMember.Username
+		</p>
 		
-			<% with CurrentMemberTask %>
-			
-			<% end_with %>
+			$TaskForm
 		
 		<% else %>
 
