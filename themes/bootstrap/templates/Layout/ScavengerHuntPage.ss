@@ -6,12 +6,22 @@
     <div class="span9">
 		$Content
 		<% if CurrentMember %>
-		
-		<p>
-		Hi $CurrentMember.Username
-		</p>
-		
+			<p>
+			Hi $CurrentMember.Username
+			</p>
+
+			
+			
+			<% if $CurrentMemberTask.Response.Status == 'Pending' %>
+			
+			Your recent submission is being reviewed, you'll be notified when it's accepted!
+			
+			<% else %>
+			
 			$TaskForm
+			
+			<% end_if %>
+			
 		
 		<% else %>
 

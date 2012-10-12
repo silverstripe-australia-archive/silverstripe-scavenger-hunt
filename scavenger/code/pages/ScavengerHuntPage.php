@@ -21,10 +21,16 @@ class ScavengerHuntPage extends Page {
 		return $fields;
 	}
 	
+	protected $currentTask;
+	
 	public function CurrentMemberTask() {
 		$member = Member::currentUser();
 		if (!$member) {
 			throw new Exception('Must be logged in ');
+		}
+		
+		if ($this->currentTask) {
+			return $this->currentTask;
 		}
 		
 		$currentResponses = $member->responsesInHunt($this);
@@ -40,9 +46,13 @@ class ScavengerHuntPage extends Page {
 				// see whether we've got an un-finished task
 				$response = $responseMap[$task->ID];
 				if ($response->Status == 'Pending') {
+					$this->currentTask = $task;
+					// store the user's response against the task...
+					$this->currentTask->Response = $response;
 					return $task;
 				}
 			} else {
+				$this->currentTask = $task;
 				return $task;
 			}
 		}

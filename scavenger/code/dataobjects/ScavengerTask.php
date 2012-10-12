@@ -39,13 +39,14 @@ class ScavengerTask extends DataObject {
 		return $fields;
 	}
 	
-	protected function newResponse() {
-		$response = TaskResponse::create();
+	protected function newResponse($type = 'TaskResponse') {
+		$response = $type::create();
 		$response->TaskID = $this->ID;
 		$response->HuntID = $this->HuntID;
+		$response->Title = 'Submitted by ' . Convert::raw2sql(Member::currentUser()->Username);
 		return $response;
 	}
-	
+
 	public function updateTaskFields(FieldList $fields) {
 		
 	}

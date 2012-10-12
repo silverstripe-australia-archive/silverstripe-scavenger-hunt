@@ -9,9 +9,9 @@ class TaskResponse extends DataObject {
 	public static $db = array(
 		'Title'			=> 'Varchar',
 		'Response'		=> 'Text',
-		'Status'		=> "Enum('Accepted,Pending','Pending')"
+		'Status'		=> "Enum('Accepted,Pending,Rejected','Pending')"
 	);
-	
+
 	public static $has_one = array(
 		'Responder'		=> 'Member',
 		'Task'			=> 'ScavengerTask',
@@ -22,12 +22,18 @@ class TaskResponse extends DataObject {
 		'Status'		=> 'Pending',
 	);
 	
+	public static $summary_fields = array(
+		'Title', 'Responder.Title', 'Status'
+	);
+	
 	public function onBeforeWrite() {
 		parent::onBeforeWrite();
+
 		if (!$this->ResponderID) {
 			$this->ResponderID = Member::currentUserID();
 		}
-
+		
 		$this->Title = 'Submitted by ' . $this->Responder()->getTitle();
 	}
 }
+
