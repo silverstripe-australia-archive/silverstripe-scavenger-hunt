@@ -22,6 +22,11 @@ class ScavengerMember extends DataExtension {
 	}
 
 	public function responsesInHunt(ScavengerHuntPage $scavengerHunt) {
-		return DataList::create('TaskResponse')->filter(array('ResponderID' => $this->owner->ID));
+		// return responses that haven't been rejected
+		
+		return DataList::create('TaskResponse')->filter(array(
+			'ResponderID' => $this->owner->ID, 
+			'Status:Negation' => 'Rejected'
+		));
 	}
 }

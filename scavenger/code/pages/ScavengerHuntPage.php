@@ -36,11 +36,11 @@ class ScavengerHuntPage extends Page {
 		$currentResponses = $member->responsesInHunt($this);
 		$responseMap = array();
 		foreach ($currentResponses as $response) {
-			$responseMap[$response->ID] = $response;
+			$responseMap[$response->TaskID] = $response;
 		}
-		
-		$tasks = $this->Tasks();
-		
+
+		$tasks = $this->Tasks()->toArray();
+
 		foreach ($tasks as $task) {
 			if (isset($responseMap[$task->ID])) {
 				// see whether we've got an un-finished task

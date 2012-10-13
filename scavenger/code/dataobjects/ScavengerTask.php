@@ -48,10 +48,18 @@ class ScavengerTask extends DataObject {
 	}
 
 	public function updateTaskFields(FieldList $fields) {
-		
+		$fields->push(new LiteralField('', $this->Description));
+		$fields->push(new TextareaField('Answer', 'Response'));
 	}
 	
 	public function processSubmission($data) {
-		
+		if (isset($data['Answer']) && strlen($data['Answer'])) {
+			$response = $this->newResponse();
+			$response->Response = $data['Answer'];
+			$response->Status = 'Pending';
+			$response->write();
+			return $response;
+		}
+		return 'You must provide an answer';
 	}
 }
