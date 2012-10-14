@@ -79,6 +79,12 @@ class TaskResponse extends DataObject {
 				$email->setTemplate('TaskResponseAcceptedEmail');
 				$email->send();
 			}
+
+			if($changed['Status']['after'] == 'Rejected') {
+				$email->setSubject('SilverStripe Scavenger Hunt Response Rejected');
+				$email->setTemplate('TaskResponseRejectedEmail');
+				$email->send();
+			}
 		}
 	}
 
