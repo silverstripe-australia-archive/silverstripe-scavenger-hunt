@@ -5,10 +5,19 @@
  * @license BSD License http://silverstripe.org/bsd-license/
  */
 class ScavengerHuntPage extends Page {
+
+	public static $db = array(
+		'CompletedContent' => 'HTMLText'
+	);
+
 	public static $has_many = array(
 		'Tasks'			=> 'ScavengerTask',
 	);
-	
+
+	public static $defaults = array(
+		'CompletedContent' => '<p>Congratulations, you have completed all tasks!</p>'
+	);
+
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 		
@@ -17,7 +26,13 @@ class ScavengerHuntPage extends Page {
 		$gf = GridField::create('Tasks', 'Tasks', $this->Tasks(), $config);
 		
 		$fields->addFieldToTab('Root.Tasks', $gf);
-		
+
+		$fields->addFieldToTab(
+			'Root.Main',
+			new HtmlEditorField('CompletedContent', 'Tasks Completed Content'),
+			'Metadata'
+		);
+
 		return $fields;
 	}
 	
@@ -60,21 +75,29 @@ class ScavengerHuntPage extends Page {
 }
 
 class ScavengerHuntPage_Controller extends Page_Controller {
+
 	public function TaskForm() {
-		$task = $this->data()->CurrentMemberTask();
-		
-		$fields = FieldList::create();
-		
-		$task->updateTaskFields($fields);
-		
-		$actions = FieldList::create(new FormAction('submit', 'Submit'));
-		
-		$form = Form::create($this, 'TaskForm', $fields, $actions);
-		
-		return $form;
+		if($task = $this->CurrentMemberTask()) {
+			$fields = new FieldList();
+			$task->updateTaskFields($fields);
+
+			return new Form(
+				$this,
+				'TaskForm',
+				$fields,
+				new FieldList(new FormAction('submit', 'Submit'))
+			);
+		}
 	}
-	
-	
+
+	public function Content() {
+		if(!$this->CurrentMemberTask()) {
+			return $this->data()->CompletedContent;
+		} else {
+			return $this->data()->Content;
+		}
+	}
+
 	public function submit($data, Form $form) {
 		$task = $this->data()->CurrentMemberTask();
 		
