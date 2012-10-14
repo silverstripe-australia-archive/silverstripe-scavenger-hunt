@@ -61,6 +61,25 @@ class TaskResponse extends DataObject {
 				$email->send();
 			}
 		}
+
+		// If the response has been approved or rejected (from pending), email
+		// the submitter with a link to the next task.
+		$changed = $this->getChangedFields();
+
+		if(array_key_exists('Status', $changed) && $changed['Status']['before'] == 'Pending') {
+			$email = new Email();
+			$email->setTo($this->Responder()->Email);
+			$email->populateTemplate(array(
+				'Responder' => $this->Responder(),
+				'Response' => $this
+			));
+
+			if($changed['Status']['after'] == 'Accepted') {
+				$email->setSubject('SilverStripe Scavenger Hunt Response Accepted');
+				$email->setTemplate('TaskResponseAcceptedEmail');
+				$email->send();
+			}
+		}
 	}
 
 }
