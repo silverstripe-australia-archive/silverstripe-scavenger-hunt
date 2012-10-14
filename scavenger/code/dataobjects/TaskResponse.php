@@ -52,7 +52,7 @@ class TaskResponse extends DataObject {
 				$email = new Email();
 				$email->setTo($member->Email);
 				$email->setSubject(sprintf('New Pending Task Submitted By %s', $this->Responder()->Username));
-				$email->setTemplate('PendingTaskApprovalEmail');
+				$email->setTemplate('TaskResponseRequiresApprovalEmail');
 				$email->populateTemplate(array(
 					'Member' => $member,
 					'Response' => $this,
