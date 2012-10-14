@@ -29,11 +29,11 @@ class TaskResponse extends DataObject {
 	public function onBeforeWrite() {
 		parent::onBeforeWrite();
 
-		if (!$this->ResponderID) {
+		if(!$this->ResponderID) {
 			$this->ResponderID = Member::currentUserID();
 		}
-		
-		$this->Title = 'Submitted by ' . $this->Responder()->getTitle();
+
+		$this->Title = 'Submitted by ' . $this->Responder()->Username;
 	}
 }
 
