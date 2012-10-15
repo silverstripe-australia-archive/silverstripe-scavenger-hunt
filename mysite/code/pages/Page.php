@@ -63,6 +63,7 @@ class Page_Controller extends ContentController {
 		
 		try {
 			$member->write();
+			$member->addToGroupByCode('Members');
 			$member->login();
 		} catch (ValidationException $ve) {
 			$form->sessionMessage("Registration failed: that username or email address may already be taken. Usernames must only contain letters and numbers", 'bad');

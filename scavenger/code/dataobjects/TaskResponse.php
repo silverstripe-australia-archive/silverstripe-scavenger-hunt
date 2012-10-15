@@ -26,6 +26,8 @@ class TaskResponse extends DataObject {
 		'Title', 'Responder.Title', 'Status'
 	);
 	
+	public static $default_sort = 'ID DESC';
+	
 	public function onBeforeWrite() {
 		parent::onBeforeWrite();
 

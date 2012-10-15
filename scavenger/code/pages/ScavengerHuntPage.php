@@ -41,7 +41,7 @@ class ScavengerHuntPage extends Page {
 	public function CurrentMemberTask() {
 		$member = Member::currentUser();
 		if (!$member) {
-			throw new Exception('Must be logged in ');
+			return null;
 		}
 		
 		if ($this->currentTask) {
