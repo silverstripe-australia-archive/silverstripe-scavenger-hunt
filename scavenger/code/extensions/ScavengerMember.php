@@ -19,6 +19,14 @@ class ScavengerMember extends DataExtension {
 		if (preg_match('/\W/', $this->owner->Username)) {
 			throw new ValidationException("Invalid username: a-z 0-9 or _ allowed");
 		}
+		
+		if (!$this->owner->FirstName) {
+			$this->owner->FirstName = $this->owner->Username;
+		}
+		
+		if (!$this->owner->Surname) {
+			$this->owner->Surname = $this->owner->Email;
+		}
 	}
 
 	public function responsesInHunt(ScavengerHuntPage $scavengerHunt) {

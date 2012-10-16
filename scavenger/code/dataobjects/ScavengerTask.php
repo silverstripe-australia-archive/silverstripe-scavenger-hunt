@@ -29,7 +29,7 @@ class ScavengerTask extends DataObject {
 	public static $summary_fields = array(
 		'Title', 'Description', 'PointsToAward'
 	);
-	
+
 	public static $default_sort = 'Sort ASC';
 
 	
