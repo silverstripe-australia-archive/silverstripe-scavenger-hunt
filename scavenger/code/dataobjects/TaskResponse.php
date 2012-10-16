@@ -24,7 +24,7 @@ class TaskResponse extends DataObject {
 	);
 	
 	public static $summary_fields = array(
-		'Title', 'Responder.Username', 'Status'
+		'Title', 'Responder.Username', 'Responder.Email', 'Status'
 	);
 	
 	public static $default_sort = 'ID DESC';
