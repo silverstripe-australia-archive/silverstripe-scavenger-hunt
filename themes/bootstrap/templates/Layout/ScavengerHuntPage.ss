@@ -10,21 +10,17 @@
 			Hi $CurrentMember.Username
 			</p>
 
-			
-			
 			<% if $CurrentMemberTask.Response.Status == 'Pending' %>
 			
 			Your recent submission is being reviewed, you'll be notified when it's accepted!
 			
 			<% else %>
 			
-			$TaskForm
+				$TaskForm
 			
 			<% end_if %>
 			
-		
 		<% else %>
-
 
 			<div class="row">
 				<div class="span4">

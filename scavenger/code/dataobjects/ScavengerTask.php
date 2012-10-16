@@ -10,6 +10,8 @@ class ScavengerTask extends DataObject {
 		'Title'			=> 'Varchar(255)',
 		'Description'	=> 'HTMLText',
 		'Sort'			=> 'Int',
+		'PointsToAward'	=> 'Int',
+		'InternalNotes'	=> 'Text',
 	);
 
 	public static $has_one = array(
@@ -18,6 +20,14 @@ class ScavengerTask extends DataObject {
 	
 	public static $has_many = array(
 		'Responses'		=> 'TaskResponse'
+	);
+	
+	public static $defaults = array(
+		'PointsToAward'	=> 1
+	);
+	
+	public static $summary_fields = array(
+		'Title', 'Description', 'PointsToAward'
 	);
 	
 	public static $default_sort = 'Sort ASC';
@@ -35,6 +45,8 @@ class ScavengerTask extends DataObject {
 			$dropdown = new DropdownField('ClassName', 'Task type', array_combine($classes, $classes));
 			$fields->addFieldToTab('Root.Main', $dropdown);
 		}
+		
+		$fields->addFieldToTab('Root.Main', new DropdownField('PointsToAward', 'Points for correct answer', range(0, 10)), 'Description');
 
 		return $fields;
 	}
@@ -44,14 +56,15 @@ class ScavengerTask extends DataObject {
 		$response->TaskID = $this->ID;
 		$response->HuntID = $this->HuntID;
 		$response->Title = 'Submitted by ' . Convert::raw2sql(Member::currentUser()->Username);
+		$response->Points = $this->PointsToAward;
 		return $response;
 	}
 
 	public function updateTaskFields(FieldList $fields) {
 		$fields->push(new LiteralField('', $this->Description));
-		$fields->push(new TextareaField('Answer', 'Response'));
+		$fields->push(new TextareaField('Answer', "Enter a response below"));
 	}
-	
+
 	public function processSubmission($data) {
 		if (isset($data['Answer']) && strlen($data['Answer'])) {
 			$response = $this->newResponse();
@@ -61,5 +74,18 @@ class ScavengerTask extends DataObject {
 			return $response;
 		}
 		return 'You must provide an answer';
+	}
+	
+	/**
+	 * Get the passed in member's accepted submission for this task
+	 * 
+	 * @param Member $member 
+	 */
+	public function getUserSubmission(Member $member) {
+		return DataList::create('TaskResponse')->filter(array(
+			'ResponderID'		=> $member->ID,
+			'TaskID'			=> $this->ID,
+			'Status:Negation'	=> 'Rejected',
+		))->first();
 	}
 }

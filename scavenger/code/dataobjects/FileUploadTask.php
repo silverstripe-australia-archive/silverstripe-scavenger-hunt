@@ -6,18 +6,22 @@
  */
 class FileUploadTask extends ScavengerTask {
 
-	
 	public function updateTaskFields(FieldList $fields) {
-		$fields->push(new FileField('File', 'Upload file'));
+		$fields->push(new LiteralField('', $this->Description));
+		$fields->push($ff = new FileField('File', 'Select a file'));
+		$folder = Member::currentUser()->memberFolder();
+		$ff->setFolderName($folder->Filename);
 	}
 	
 	public function processSubmission($data) {
 		if(!isset($data['File']['tmp_name'])) {
 			return 'Please select a file to upload';
 		}
+		
+		$folder = Member::currentUser()->memberFolder();
 
 		$upload = new Upload();
-		$upload->load($data['File']);
+		$upload->load($data['File'], $folder->Filename);
 
 		if($upload->isError()) {
 			return sprintf(

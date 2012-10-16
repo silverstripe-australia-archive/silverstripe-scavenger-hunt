@@ -29,4 +29,28 @@ class ScavengerMember extends DataExtension {
 			'Status:Negation' => 'Rejected'
 		));
 	}
+	
+	public function summaryForHunt(ScavengerHuntPage $scavengerHunt) {
+		$existing = DataList::create('MemberHuntSummary')->filter(array(
+			'MemberID'		=> $this->owner->ID,
+			'HuntID'		=> $scavengerHunt->ID,
+		))->first();
+		
+		if (!$existing) {
+			$existing = MemberHuntSummary::create();
+			$existing->Title = 'Summary for ' . $this->owner->Username . ' in "' . $scavengerHunt->Title . '"';
+			$existing->MemberID = $this->owner->ID;
+			$existing->HuntID = $scavengerHunt->ID;
+			$existing->write();
+		}
+		return $existing;
+	}
+
+	public function memberFolder() {
+		// get the folder for this user
+		$name = md5($this->owner->Username);
+		$path = 'user-files/' . $name;
+		$folder = Folder::find_or_make($path);
+		return $folder;
+	}
 }

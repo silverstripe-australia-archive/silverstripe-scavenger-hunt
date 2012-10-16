@@ -9,7 +9,8 @@ class TaskResponse extends DataObject {
 	public static $db = array(
 		'Title'			=> 'Varchar',
 		'Response'		=> 'Text',
-		'Status'		=> "Enum('Accepted,Pending,Rejected','Pending')"
+		'Status'		=> "Enum('Accepted,Pending,Rejected','Pending')",
+		'Points'		=> 'Int',
 	);
 
 	public static $has_one = array(
@@ -23,10 +24,24 @@ class TaskResponse extends DataObject {
 	);
 	
 	public static $summary_fields = array(
-		'Title', 'Responder.Title', 'Status'
+		'Title', 'Responder.Username', 'Status'
 	);
 	
 	public static $default_sort = 'ID DESC';
+	
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+		
+		$df = new DropdownField('Points', 'Points awarded for this answer', range(0, 10));
+		
+		$fields->replaceField('Points', $df);
+		
+		$parentDesc = 'In response to "' . $this->Task()->Title . '"<br/><br/>' . $this->Task()->Description .'<br/><br/>' . $this->Task()->InternalNotes;
+		
+		$fields->addFieldToTab('Root.Main', new LiteralField('OriginalQuestion', $parentDesc), 'Title');
+		
+		return $fields;
+	}
 	
 	public function onBeforeWrite() {
 		parent::onBeforeWrite();
@@ -87,6 +102,10 @@ class TaskResponse extends DataObject {
 				$email->setTemplate('TaskResponseRejectedEmail');
 				$email->send();
 			}
+		}
+
+		if ($this->Status == 'Accepted') {
+			$this->Responder()->summaryForHunt($this->Hunt())->updateTotal();
 		}
 	}
 
