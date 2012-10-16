@@ -17,7 +17,6 @@ class ExactAnswerTask extends ScavengerTask {
 	}
 	
 	public function updateTaskFields(FieldList $fields) {
-		$fields->push(new LiteralField('Question', $this->Description));
 		$fields->push(new TextField('Answer', 'Answer'));
 	}
 	

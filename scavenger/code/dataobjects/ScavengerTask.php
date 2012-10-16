@@ -7,11 +7,13 @@
 class ScavengerTask extends DataObject {
 	
 	public static $db = array(
-		'Title'			=> 'Varchar(255)',
-		'Description'	=> 'HTMLText',
-		'Sort'			=> 'Int',
-		'PointsToAward'	=> 'Int',
-		'InternalNotes'	=> 'Text',
+		'Title'				=> 'Varchar(255)',
+		'Description'		=> 'HTMLText',
+		'Sort'				=> 'Int',
+		'PointsToAward'		=> 'Int',
+		'InternalNotes'		=> 'Text',
+		'AvailableAfter'	=> 'SS_Datetime',
+		'AnswerableAfter'	=> 'SS_Datetime',
 	);
 
 	public static $has_one = array(
@@ -47,6 +49,9 @@ class ScavengerTask extends DataObject {
 		}
 		
 		$fields->addFieldToTab('Root.Main', new DropdownField('PointsToAward', 'Points for correct answer', range(0, 10)), 'Description');
+		
+		$fields->dataFieldByName('AvailableAfter')->getDateField()->setConfig('showcalendar', true);
+		$fields->dataFieldByName('AnswerableAfter')->getDateField()->setConfig('showcalendar', true);
 
 		return $fields;
 	}
@@ -61,7 +66,6 @@ class ScavengerTask extends DataObject {
 	}
 
 	public function updateTaskFields(FieldList $fields) {
-		$fields->push(new LiteralField('', $this->Description));
 		$fields->push(new TextareaField('Answer', "Enter a response below"));
 	}
 
@@ -87,5 +91,19 @@ class ScavengerTask extends DataObject {
 			'TaskID'			=> $this->ID,
 			'Status:Negation'	=> 'Rejected',
 		))->first();
+	}
+
+	public function Viewable() {
+		if ($this->AvailableAfter) {
+			return time() > strtotime($this->AvailableAfter);
+		}
+		return true;
+	}
+	
+	public function Answerable() {
+		if ($this->AnswerableAfter) {
+			return time() > strtotime($this->AnswerableAfter);
+		}
+		return $this->Viewable();
 	}
 }

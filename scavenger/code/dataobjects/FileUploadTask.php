@@ -7,7 +7,6 @@
 class FileUploadTask extends ScavengerTask {
 
 	public function updateTaskFields(FieldList $fields) {
-		$fields->push(new LiteralField('', $this->Description));
 		$fields->push($ff = new FileField('File', 'Select a file'));
 		$folder = Member::currentUser()->memberFolder();
 		$ff->setFolderName($folder->Filename);

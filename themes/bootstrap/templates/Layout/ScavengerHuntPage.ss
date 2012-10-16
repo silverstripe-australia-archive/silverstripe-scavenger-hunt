@@ -6,18 +6,29 @@
     <div class="span9">
 		$Content
 		<% if CurrentMember %>
-			<p>
-			Hi $CurrentMember.Username
-			</p>
+			<% if $CurrentMemberTask %>
+				
+				<% if $CurrentMemberTask.Response.Status == 'Pending' %>
 
-			<% if $CurrentMemberTask.Response.Status == 'Pending' %>
-			
-			Your recent submission is being reviewed, you'll be notified when it's accepted!
-			
-			<% else %>
-			
-				$TaskForm
-			
+				Your recent submission is being reviewed, you'll be notified when it's accepted!
+
+				<% else %>
+
+					<% if $CurrentMemberTask.Viewable %>
+						<div class="task-description">
+							$CurrentMemberTask.Description
+						</div>
+						<% if $CurrentMemberTask.Answerable %>
+						$TaskForm
+						<% else %>
+						You can respond to this task after $CurrentMemberTask.AnswerableAfter.Format(g:ia jS M)
+						<% end_if %>
+
+					<% else %>
+						You can see this task after $CurrentMemberTask.AvailableAfter.Format(g:ia jS M)
+					<% end_if %>
+
+				<% end_if %>
 			<% end_if %>
 			
 		<% else %>

@@ -11,6 +11,7 @@ class TaskResponse extends DataObject {
 		'Response'		=> 'Text',
 		'Status'		=> "Enum('Accepted,Pending,Rejected','Pending')",
 		'Points'		=> 'Int',
+		'Notes'			=> 'Text',		
 	);
 
 	public static $has_one = array(
@@ -38,8 +39,13 @@ class TaskResponse extends DataObject {
 		
 		$parentDesc = 'In response to "' . $this->Task()->Title . '"<br/><br/>' . $this->Task()->Description .'<br/><br/>' . $this->Task()->InternalNotes;
 		
+		$notes = $fields->dataFieldByName('Notes');
+		if ($notes) {
+			$notes->setTitle('Approval notes (admin only)');
+		}
+
 		$fields->addFieldToTab('Root.Main', new LiteralField('OriginalQuestion', $parentDesc), 'Title');
-		
+
 		return $fields;
 	}
 	

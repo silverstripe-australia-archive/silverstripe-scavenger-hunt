@@ -134,6 +134,10 @@ class ScavengerHuntPage_Controller extends Page_Controller {
 		$task = $this->data()->CurrentMemberTask();
 		
 		if ($task) {
+			if (!$task->Answerable()) {
+				$this->redirect('http://lmgtfy.com/?q=jeffk&l=1');
+				return;
+			}
 			if ($task->getUserSubmission(Member::currentUser())) {
 				$form->sessionMessage("You've already submitted for this task, duplicate submissions are not allowed!", 'warning');
 			} else {
