@@ -248,7 +248,7 @@ p {
 #header {
 	position: relative;
 	width: 80%;
-	margin: 0 0 0 20%;
+	margin: 0 10% 0 10%;
 	max-width: 80em;
 	padding-bottom: 20px;
 	overflow: hidden;
@@ -263,7 +263,7 @@ p {
 
 #wrapper-content {
 	width: 80%;
-	margin: 0 0 0 20%;
+	margin: 0 10% 0 10%;
 	max-width: 80em;
 	padding-bottom: 5em;
 	display: inline-block;
@@ -287,10 +287,9 @@ p {
 #navMain li {
 	float: left;
 	margin-right: 15px;
-	width: 120px;
+	max-width: 120px;
 }
 #navMain a {
-	float: left;
 	display: block;
 	color: #49BAEF;
 	font-weight: bold;
