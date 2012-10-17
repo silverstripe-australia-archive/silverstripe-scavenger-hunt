@@ -21,7 +21,7 @@ class ExactAnswerTask extends ScavengerTask {
 	}
 	
 	public function processSubmission($data) {
-		if (isset($data['Answer']) && $data['Answer'] == $this->ExpectedAnswer) {
+		if (isset($data['Answer']) && strtolower($data['Answer']) == strtolower($this->ExpectedAnswer)) {
 			$response = $this->newResponse();
 			$response->Response = $data['Answer'];
 			$response->Status = 'Accepted';
