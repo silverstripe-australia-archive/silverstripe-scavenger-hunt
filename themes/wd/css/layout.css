@@ -497,7 +497,7 @@ ul#calendar-events-list .vevent li.register span {
 	#navMain li, #navMain a { float: none; display: block; width: auto; max-width: none; padding: 0;}
 	
 	#navMain li { border-left: 0 none; border-bottom: 1px solid #062949; }
-	#navMain a { padding: 5px; }
+	#navMain a { padding: 10px 5px; }
 	
 	#wrapper-content { position: relative; }
 	
@@ -519,7 +519,7 @@ ul#calendar-events-list .vevent li.register span {
 	#navMain li, #navMain a { float: none; display: block; width: auto; max-width: none; padding: 0;}
 	
 	#navMain li { border-left: 0 none; border-bottom: 1px solid #062949; }
-	#navMain a { padding: 5px; }
+	#navMain a { padding: 10px 5px; }
 	
 	#wrapper-content { position: relative; }
 	
