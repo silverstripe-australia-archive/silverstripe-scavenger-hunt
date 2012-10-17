@@ -1,0 +1,32 @@
+input, select, textarea {
+	border: 0 none;
+	padding: 5px;
+	font-family: "PT Sans", Lucida, Arial, Helvetica, sans-serif;
+}
+
+.text input, select, textarea {
+	border-radius: 0;
+	background: #FFF;
+	width: 290px;
+	border: 0 none;
+}
+
+form .field {
+	margin-bottom: 10px;
+}
+
+.Actions input {
+	background: #49BAEF;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #FFF;
+	padding: 5px 10px;
+	font-size: 18px;
+}
+
+form .required {
+	display: inline-block;
+	background: #FF0000;
+	color: #FFF;
+	padding: 2px 6px;
+}

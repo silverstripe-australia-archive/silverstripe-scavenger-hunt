@@ -1,0 +1,25 @@
+
+.typography a {
+	color: #49BAEF;
+}
+.typography h1 {
+	font-size: 4em;
+	color: #FFF;
+	margin-top: 0;
+	line-height: 1;
+}
+.typography h2 {
+	font-size: 2em;
+	color: #FFF;
+	margin-top: 0;
+	line-height: 1;
+}
+.typography .task {
+	font-size: 1.2em;
+}
+.typography .task h2 {
+	font-size: 1.66666667em;
+}
+.typography .task-description {
+	font-weight: bold;
+}
