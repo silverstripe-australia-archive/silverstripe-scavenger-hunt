@@ -48,6 +48,10 @@ class Page_Controller extends ContentController {
 		$fields->push(EmailField::create('Email', 'Email'));
 		$fields->push(PasswordField::create('Password', 'Password'));
 		
+		if($terms = $this->SiteConfig()->TermsPage()){
+			$fields->push(LiteralField::create('TermsLink', "<p id='terms'>By registering you agree to the <a href='{$terms->Link()}' target='_blank'>terms and conditions</a></p>"));	
+		}
+
 		$actions->push(FormAction::create('register', 'Register'));
 		
 		$form = Form::create($this, 'RegisterForm', $fields, $actions);

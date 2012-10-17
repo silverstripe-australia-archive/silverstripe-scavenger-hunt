@@ -108,6 +108,15 @@ class ScavengerHuntPage extends Page {
 
 class ScavengerHuntPage_Controller extends Page_Controller {
 
+	public function init(){
+		parent::init();
+
+		if(!Member::currentUser()){
+			Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
+			Requirements::javascript('themes/wd/javascript/registration.js');
+		}
+	}
+
 	public function TaskForm() {
 		if($task = $this->CurrentMemberTask()) {
 			$fields = new FieldList();

@@ -29,11 +29,22 @@
 		
 	<% else %>
 		
-		<h2>Log in</h2>
-		$LoginForm
+		<div id='login-form'>
+			<h2>Log in</h2>
+			$LoginForm
+		</div>
 		
-		<h2 class="space-above">Register</h2>
-		$RegisterForm
+		<div id='register-form'>
+			<h2 class="space-above">Register</h2>
+			$RegisterForm
+		</div>
+
+		<% if $CurrentMember %>
+
+		<% else %>
+			<span id='reglog'>Already registered?</span>
+			<span id='logreg'>Not registered?</span>
+		<% end_if %>
 
 	<% end_if %>
 </div>
