@@ -224,9 +224,8 @@ body {
 body.home h1 {
 	display: none;
 }
-
 .space-above {
-	margin-top: 1.2em !important;
+	margin-top: 1.5em !important;
 }
 
 img.bgImage {
@@ -270,7 +269,7 @@ p {
 	display: inline-block;
 }
 
-.sidebar-right {
+.sidebar-right, .right-content {
 	float: right;
 	width: 45%;
 	position: relative;
@@ -321,7 +320,92 @@ p {
 .no-space-below {
 	margin-bottom: 0 !important;
 }
+ul#calendar-events-list {
+	overflow: hidden;
+}
+ul#calendar-events-list .vevent {
+	float: left;
+	margin-right: 2.5%;
+	padding: 0;
+	background: #49BAEF;
+	border: 0 none;
+	min-width: 220px;
+}
+ul#calendar-events-list li.vevent:last-child {
+	margin-right: 0;
+}
+ul#calendar-events-list .vevent {
+	width: 23%;
+	background-color: #416181;
+	background-image: url(../images/map.png);
+	background-repeat: no-repeat;
+	position: relative;
+}
+ul#calendar-events-list .vevent a {
+	display: block;
+	padding-bottom: 1em;
+	text-decoration: none;
+	min-height: 170px;
+}
+ul#calendar-events-list .vevent .city {
+	position: absolute;
+	background-image: url(../images/city.png);
+	background-repeat: no-repeat;
+	width: 27px;
+	height: 27px;
+	display: block;
+}
+ul#calendar-events-list .Brisbane {
+	background-position: 100% -30px;
+}
+.vevent.Brisbane .city {
+	top: 57px;
+	right: 1px;
+}
+ul#calendar-events-list .Sydney {
+	background-position: 100% -85px;
+}
+.vevent.Sydney .city {
+	top: 75px;
+	right: 37px;
+}
+ul#calendar-events-list .Canberra {
+	background-position: 100% -70px;
+}
+.vevent.Canberra .city {
+	top: 90px;
+	right: 62px;
+}
+ul#calendar-events-list .Melbourne {
+	background-position: 100% -51px;
+}
+.vevent.Melbourne .city {
+	top: 145px;
+	right: 82px;
+}
+ul#calendar-events-list .vevent h2 {
+	margin-left: 10px;
+	text-transform: uppercase;
+}
+ul#calendar-events-list .vevent li {
+	margin-right: 20px;
+	margin-bottom: 4px;
+}
 
+ul#calendar-events-list .vevent li span {
+	display: inline-block;
+	font-weight: bold;
+	padding: 5px 10px 5px 10px;
+	text-transform: uppercase;
+	background: #FFF;
+	color: #113953;
+}
+ul#calendar-events-list .vevent li.register span {
+	color: #DD004B;
+}
+.event-detail .location {
+	color: #DD004B;
+}
 .actionLink a {
 	display: inline-block;
 	padding: 5px 10px;
@@ -358,6 +442,9 @@ p {
 .right-content {
 	background:url(../images/scavenger_hunt.png) 0 0 no-repeat;
 	padding-left: 383px;
+	min-height: 376px;
+	width: auto;
+	float: none;
 }
 
 .right-content h2 a {
@@ -401,34 +488,7 @@ p {
 		width: 90%;
 		margin-left: 5%;
 	}
-}
-
-@media only screen and (min-width: 480px) {
-  /* Style adjustments for viewports 480px and over go here */
-	#wrapper-content, #header {
-		width: 85%;
-		margin-left: 10%;
-	}
 	
-	#header { height: auto; }
-	#logo, #navMain { float: none; display: inline-block; width: 100%; }
-	
-	#navMain { margin-top: 20px; float: none; margin-bottom: 20px;}
-	
-	#navMain li, #navMain a { float: none; display: block; width: auto; max-width: none; padding: 0;}
-	
-	#navMain li { border-left: 0 none; border-bottom: 1px solid #062949; }
-	#navMain a { padding: 10px 5px; }
-	
-	#wrapper-content { position: relative; }
-	
-	.left-content, .sidebar-right, .right-content { float: none; width: auto; }
-	
-}
-
-@media only screen and (max-width: 860px) {
-  /* Style adjustments for viewports 768px and over go here */
-  
 	#header { height: auto; }
 	#logo, #navMain { float: none; display: inline-block; width: 100%; }
 	
@@ -443,10 +503,29 @@ p {
 	
 	.left-content, .sidebar-right, .right-content { float: none; width: auto; }
 	
-	.right-content {
-		background: none;
-		padding-left: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  /* Style adjustments for viewports 768px and over go here */
+  #wrapper-content, #header {
+		width: 90%;
+		margin-left: 5%;
 	}
+	#header { height: auto; }
+	#logo, #navMain { float: none; display: inline-block; width: 100%; }
+	
+	#navMain { margin-top: 20px; float: none; margin-bottom: 20px;}
+	
+	#navMain li, #navMain a { float: none; display: block; width: auto; max-width: none; padding: 0;}
+	
+	#navMain li { border-left: 0 none; border-bottom: 1px solid #062949; }
+	#navMain a { padding: 5px; }
+	
+	#wrapper-content { position: relative; }
+	
+	.left-content, .sidebar-right, .right-content { float: none; width: auto; }
+	
+	.right-content { background: none; padding-left: 0; }
 }
 
 @media only screen and (min-width: 1280px) {
