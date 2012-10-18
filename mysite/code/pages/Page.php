@@ -75,4 +75,12 @@ class Page_Controller extends ContentController {
 
 		$this->redirect($this->Link());
 	}
+	
+	public function Link($action = '') {
+		if ($action == 'login') {
+			$action = '';
+		}
+		return parent::Link($action);
+	}
+	
 }
