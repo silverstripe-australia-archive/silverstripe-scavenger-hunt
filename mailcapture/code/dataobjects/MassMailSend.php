@@ -3,7 +3,7 @@
 /**
  * A way of grouping many emails under a single banner
  *
- * @author marcus@silverstripe.com.au
+ * @author marcus@symbiote.com.au
  * @license BSD License http://silverstripe.org/bsd-license/
  */
 class MassMailSend extends DataObject {

@@ -3,7 +3,7 @@
 /**
  * A mailer that can be used to capture emails instead of sending them out
  * 
- * @author marcus@silverstripe.com.au
+ * @author marcus@symbiote.com.au
  * @license BSD License http://silverstripe.org/bsd-license/
  */
 class CaptureMailer extends Mailer {

@@ -3,7 +3,7 @@
 /**
  * Controller for viewing a previously captured email as the client would see it
  *
- * @author marcus@silverstripe.com.au
+ * @author marcus@symbiote.com.au
  * @license BSD License http://silverstripe.org/bsd-license/
  */
 class CapturedEmailController extends Controller {

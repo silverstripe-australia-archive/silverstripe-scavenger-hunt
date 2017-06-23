@@ -5,7 +5,7 @@
 		<% base_tag %>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>The Great SilverStripe Scavenger Hunt @ Web Directions 2012 | SilverStripe Australia</title>
+		<title>The Great SilverStripe Scavenger Hunt @ Web Directions 2012 | Symbiote</title>
 		<% require themedCSS(layout) %>
 		<% require themedCSS(typography) %>
 		<% require themedCSS(forms) %>
@@ -19,7 +19,7 @@
 			
 			<div id="wrapper-inner">
 				<div id="header">
-					<p id="logo"><a href="home"><img src="$ThemeDir/images/ssau_create-the-web.png" /></a></p>
+					<p id="logo"><a href="home"><img src="$ThemeDir/images/symbiote_create-the-web.png" /></a></p>
 					<% include MainNavigation %>
 				</div>
 				
